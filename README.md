@@ -11,11 +11,11 @@ The Back-Server C is a computing server. It receives data from the AWS server, p
 The AWS server searches for the information of the designated link (identified by Link ID) over storage servers. After receiving replies from storage servers, the AWS server then sends the link information (bandwidth, link length, propagation velocity, noise power) with client inputs (link ID, file size, signal power) to the computing server. Once the AWS server receives the computed results (which will be end-to-end delay, propagation delay, and transmission delay) from server C, it finally communicates the end-to-end delay to the client in the required format (this is also an example of how a cloud-computing service such Amazon Web Services might speed up a large computation task offloaded by the client).
 
 
-1. What have I done in this assignment:
+###### What have I done in this assignment:
 
 the client gets three parameters from input command line, sending them to aws server using TCP. AWS gets the three parameters, sending them to monitor, and send link id to back-end server A and B. Server A and B get link id from AWS using UDP, searching in database a and b, sending back the result to AWS. If there is a match, the AWS server will send the input with the received link information to the back-end server C to calculate the transmission delay, propagation delay, and the end-to-end delay. After getting the calculated results from back-end server C, send the result back to client and monitor. During the whole process, client, monitor and AWS communicate over TCP connections. AWS and the Back-Servers A, B, C communicate over UDP connections.
 
-2. What my code files are and what each one of them does:
+###### What my code files are and what each one of them does:
 
 - client.c: it gets the three parameters, sending them to aws server using TCP. Getting back the result and show on the screen after calculated.
 
