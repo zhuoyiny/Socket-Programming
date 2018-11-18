@@ -3,7 +3,7 @@
 The objective of this assignment is to familiarize with UNIX socket programming.
 
 In this project, I implemented a model computational offloading where a single client issues three parameters (link ID, file/packet size, and signal power) to the AWS server and expects the reply for the end-to-end delay of the designated link.
-![Illustration of the network.png](https://github.com/zhuoyiny/socket-programming/Illustrationofthenetwork.png)
+![Illustration of the network.png](https://github.com/zhuoyiny/Socket-Programming/blob/master/Illustrationofthenetwork.png)
 The setup of the network is illustrated as follows. The server communicating with the client acts similar as AWS (Amazon Web Server). There are three backend servers, named Back-Server A, Back-Server B and Back-Server C. Back-Servers A and B are storage servers. Each of them possesses a database file, database_a.csv and database_b.csv, respectively, in which attribute values regarding information of links are stored. A toy database is demonstrated in Table 1. There are five attributes in the database, which are {Link ID, Bandwidth, Length, Velocity (Propagation Speed), Noise Power}, from left to right. In database_a.csv and database_b.csv, there will be only five columns of numbers without names of attributes.
 
 The Back-Server C is a computing server. It receives data from the AWS server, performs computational tasks, and returns the results to the AWS server. The monitor connecting to the AWS server is used to record results of every steps and print them out. The client, monitor and the AWS communicate over TCP connections while the AWS and the Back-Servers A, B, & C communicate over UDP connections.
