@@ -1,10 +1,3 @@
-//
-//  monitor.c
-//  
-//
-//  Created by Zhuoying Yi on 11/13/18.
-//
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -43,12 +36,12 @@ int main(void)
     memset(&hints, 0, sizeof hints);
     hints.ai_family = AF_UNSPEC;
     hints.ai_socktype = SOCK_STREAM;
-    
+
     if ((rv = getaddrinfo(HOST, AWSPORT, &hints, &servinfo)) != 0) {
         fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
         return 1;
     }
-    
+
     for(p = servinfo; p != NULL; p = p->ai_next) {
         if ((sockfd = socket(p->ai_family, p->ai_socktype, p->ai_protocol)) == -1) {
             perror("client: socket");
@@ -56,21 +49,20 @@ int main(void)
         }
         if (connect(sockfd, p->ai_addr, p->ai_addrlen) == -1) {
             close(sockfd);
-//            perror("client: connect");
             continue;
         }
-        
+
         break;
     }
-    
+
     if (p == NULL) {
         fprintf(stderr, "client: failed to connect\n");
         return 2;
     }
-    
+
     freeaddrinfo(servinfo);
     printf("The monitor is up and running\n");
-    
+
     while(1) {
         //recv the three input parameters from aws
         if ((recv(sockfd, &linkid, sizeof(int), 0)) == -1) {
@@ -86,17 +78,17 @@ int main(void)
             exit(1);
         }
         printf("The monitor received link ID=<%d>, size=<%d>, and power=<%d> from the AWS\n", linkid, size, power);
-        
+
         double transdelay;
         double propdelay;
         double endtoend;
-    
+
         int nomatch;
         if ((recv(sockfd, &nomatch, sizeof(int), 0)) == -1) {
             perror("recv");
             exit(1);
         }
-        
+
         if(nomatch == 1) {
             printf("Found no matches for link <%d>\n",linkid);
         }
@@ -115,13 +107,12 @@ int main(void)
                 exit(1);
             }
             printf("The result for link <%d>:\nTt = <%.2f>ms\nTp = <%.2f>ms\nDelay = <%.2f>ms\n",linkid, transdelay, propdelay, endtoend);
-            
+
         }
-    
-    
+
+
     }
     close(sockfd);
-    
+
     return 0;
 }
-

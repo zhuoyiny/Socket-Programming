@@ -1,10 +1,3 @@
-//
-//  serverC.c
-//
-//
-//  Created by Zhuoying Yi on 11/13/18.
-//
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -16,8 +9,6 @@
 #define BUFFER_UDP_LEN 100000
 #define PORT_UDP 23105
 #define SERVER_NAME "C"
-
-
 
 typedef struct lines{
     int A;
@@ -32,12 +23,12 @@ typedef struct lines{
 
 int main(void)
 {
-    
+
     struct sockaddr_in c_server_UDP, c_client_UDP;
     socklen_t sockfd_C_UDP;
     socklen_t client_len_UDP = sizeof(c_client_UDP), recv_UDP_len;
     int buff_for_UDP[BUFFER_UDP_LEN];
-    
+
     int linkid;
     int size;
     int power;
@@ -100,22 +91,11 @@ int main(void)
         }
         printf("The Server %s received link information of link <%d>, file size <%d>, and signal power <%d>\n", SERVER_NAME, linkid, size, power);
 
-//        printf( " linkid: %d\n", linkid);
-//        printf( " size: %d\n", size);
-//        printf( " power: %d\n", power);
-//        printf( " bandwidth: %f\n", bandwidth);
-//        printf( " length: %f\n", length);
-//        printf( " velocity: %f\n", velocity);
-//        printf( " noisepower: %f\n", noisepower);
-
         transdelay = 1000 * size / (1000000 * bandwidth * log(1 + pow(10, (power - noisepower)/10))/log(2));
 
         propdelay = 1000 * 1000 * length / (10000000 * velocity);
 
         endtoend = transdelay + propdelay;
-//        printf( " transdelay: %.2f\n", transdelay);
-//        printf( " propdelay: %.2f\n", propdelay);
-//        printf( " endtoend: %.2f\n", endtoend);
 
         printf("The server C finished the calculation for link <%d>\n", linkid);
         if ((sendto(sockfd_C_UDP, &transdelay, sizeof(double), 0,

@@ -1,10 +1,3 @@
-//
-//  client.c
-//
-//
-//  Created by Zhuoying Yi on 11/13/18.
-//
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -71,7 +64,6 @@ int main(int argc, char *argv[])
 
         if (connect(sockfd, p->ai_addr, p->ai_addrlen) == -1) {
             close(sockfd);
-//          perror("client: connect");
             continue;
         }
 
@@ -106,7 +98,7 @@ int main(int argc, char *argv[])
         perror("recv");
         exit(1);
     }
-    
+
     if(nomatch == 1) {
         printf("Found no matches for link <%d>\n",linkid);
     }
@@ -117,7 +109,7 @@ int main(int argc, char *argv[])
         }
         printf("The delay for link <%d> is <%.2f>ms\n",linkid, delay);
     }
-    
+
     close(sockfd);
 
     return 0;

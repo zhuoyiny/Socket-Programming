@@ -44,7 +44,6 @@ void read_file(int linkid) {
   while(fgets(line, BUFFSIZE, file) != NULL){
 
       Token = strtok(line, ",");
-//      printf( " linkid: %d\n", linkid);
       if (linkid == atoi(Token)) {
           struc[i].flag = 1;
           struc[i].A = atoi(Token);
@@ -57,11 +56,6 @@ void read_file(int linkid) {
           TokenE = strtok(NULL, ",");
           struc[i].E = atof(TokenE);
           index++;
-//          printf( " tokenA: %s\n", Token);
-//          printf( " tokenB: %s\n", TokenB);
-//          printf( " tokenC: %s\n", TokenC);
-//          printf( " tokenD: %s\n", TokenD);
-//          printf( " tokenE: %s\n", TokenE);
           break;
       } else {
           struc[i].flag = 0;
@@ -73,14 +67,6 @@ void read_file(int linkid) {
       }
       i++;
   }
-//  printf("count: %d\n", index);
-//  printf("i: %d\n", i);
-//    printf( " struc_flag: %d\n", struc[i].flag);
-//    printf( " struc_A: %d\n", struc[i].A);
-//    printf( " struc_B: %f\n", struc[i].B);
-//    printf( " struc_C: %f\n", struc[i].C);
-//    printf( " struc_D: %f\n", struc[i].D);
-//    printf( " struc_E: %f\n", struc[i].E);
 
     printf( "The server %s has found <%d> match\n", SERVER_NAME, struc[i].flag);
      if ((sendto(sockfd_A_UDP, &struc[i].flag, sizeof(int), 0,
@@ -111,8 +97,6 @@ void read_file(int linkid) {
      printf("The Server %s finished sending the output to AWS\n", SERVER_NAME);
 
 
-
-  // free(line);
   fclose(file);
 
 }
