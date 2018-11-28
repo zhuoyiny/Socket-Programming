@@ -28,3 +28,5 @@ the client gets three parameters from input command line, sending them to aws se
 - serverC.c: it gets input by user and the received link information get from database from AWS using UDP, then making calculation and send back the result to aws.
 
 - monitor.c: it gets the three parameters from AWS server and link information get from database A and B from AWS through TCP.
+
+Please DO NOT copy the work for assignment submission. I am not responsible for any potential academic integrity issues.
